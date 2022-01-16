@@ -21,7 +21,8 @@ Bootstrap(app)
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", )
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -160,14 +161,14 @@ def show_post(post_id):
     return render_template("post.html", post=requested_post, form=form, current_user=current_user)
 
 
-@app.route("/about", methods=["POST"])
-def about():
-    return render_template("about.html")
+# @app.route("/about", methods=["POST"])
+# def about():
+#     return render_template("about.html")
 
 
-# @app.route("/contact")
-# def contact():
-#     return render_template("contact.html", current_user=current_user)
+@app.route("/contact")
+def contact():
+    return render_template("contact.html", current_user=current_user)
 
 
 @app.route("/contact", methods=["POST"])
